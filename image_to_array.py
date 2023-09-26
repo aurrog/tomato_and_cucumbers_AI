@@ -16,6 +16,9 @@ class NumpyEncoder(json.JSONEncoder):
 # arr = np.asarray(img, dtype='uint8')
 # print(arr.shape)
 # # Заппустить в цикл и сохранить сброку массивов в json
+#TOMATO ----- 0
+#CUCUMBER --- 1
+array_y = np.array([])
 path = 'Tomato'
 array_main = []
 for root, dirs, files in os.walk(path):
@@ -27,10 +30,24 @@ for root, dirs, files in os.walk(path):
         img = img.convert('L')
         # array_main = np.append(array_main, np.asarray(img, dtype='uint8'))
         array_main.append(np.asarray(img, dtype='uint8'))
+        array_y = np.append(array_y, 0)
 
+path2='Cucumber'
+for root, dirs, files in os.walk(path2):
+    for filename in files:
+        # print(path+'/'+filename)
+        file = path2+'/'+filename
+        img = Image.open(file)
+        img = img.resize((90, 90))
+        img = img.convert('L')
+        # array_main = np.append(array_main, np.asarray(img, dtype='uint8'))
+        array_main.append(np.asarray(img, dtype='uint8'))
+        array_y = np.append(array_y, 1)
+
+datamain = [array_main, array_y]
 # print(array_main.shape)
 with open('DATA.json', 'w') as f:
-    json.dump(array_main, f, cls=NumpyEncoder)
+    json.dump(datamain, f, cls=NumpyEncoder)
 #
 #
 #
