@@ -69,3 +69,5 @@ with open('DATA.json', 'w') as f:
 # print(b.shape)
 # for i in b:
 #     print(i)
+import pip
+print(pip.List, pip.Optional)
